@@ -46,7 +46,7 @@ import Helmet from 'react-helmet';
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 // import posts from './routes/post.routes';
-import dummyData from './dummyData';
+
 import serverConfig from './config';
 import lanes from './routes/lane.routes';
 import notes from './routes/note.routes';
@@ -63,7 +63,7 @@ if (process.env.NODE_ENV !== 'test') {
     }
 
     // feed some dummy data in DB.
-    dummyData();
+    // dummyData();
   });
 }
 
