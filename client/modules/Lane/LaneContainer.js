@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Lane from './Lane';
-import { deleteLane, updateLane, editLane } from './LaneActions';
+import { editLane, updateLaneRequest, deleteLaneRequest, createLaneRequest } from './LaneActions';
 import { createNoteRequest } from '../Note/NoteActions';
 
 
@@ -10,9 +10,10 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   editLane,
-  deleteLane,
-  updateLane,
+  deleteLane: deleteLaneRequest,
+  updateLane: updateLaneRequest,
   addNote: createNoteRequest,
+  createLane: createLaneRequest,
 };
 
 export default connect(

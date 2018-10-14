@@ -17,10 +17,26 @@ export function createNote(note, laneId) {
   };
 }
 
+export function createNoteRequest(note, laneId) {
+  return (dispatch) => {
+    return callApi('notes', 'post', { note, laneId }).then(noteResp => {
+      dispatch(createNote(noteResp, laneId));
+    });
+  };
+}
+
 export function updateNote(note) {
   return {
     type: UPDATE_NOTE,
     note,
+  };
+}
+
+export function updateNoteRequest(note) {
+  return dispatch => {
+    return callApi(`notes/${note.id}`, 'put', note).then(noteResp => {
+      dispatch(updateNote(noteResp));
+    });
   };
 }
 
@@ -29,6 +45,14 @@ export function deleteNote(noteId, laneId) {
     type: DELETE_NOTE,
     noteId,
     laneId,
+  };
+}
+
+export function deleteNoteRequest(noteId, laneId) {
+  return dispatch => {
+    callApi(`notes/${noteId}`, 'delete').then(() => {
+      dispatch(deleteNote(noteId, laneId));
+    });
   };
 }
 
@@ -44,13 +68,5 @@ export function createNotes(notesData) {
   return {
     type: CREATE_NOTES,
     notes: notesData,
-  };
-}
-
-export function createNoteRequest(note, laneId) {
-  return (dispatch) => {
-    return callApi('notes', 'post', { note, laneId }).then(noteResp => {
-      dispatch(createNote(noteResp, laneId));
-    });
   };
 }
