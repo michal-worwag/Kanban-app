@@ -34,3 +34,7 @@ input {
   font-size: 0.8em;
   outline: 0;
 }
+
+.notes {
+  min-height: 100px;
+}
