@@ -1,0 +1,11 @@
+.value {
+	color: #ecf0f1;
+	font-size: 0.8em;
+	cursor: pointer;
+}
+
+input {
+	padding: 2px 4px;
+	width: 100%;
+	font-size: 15px;
+}

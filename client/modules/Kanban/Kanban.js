@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Lanes from '../Lane/Lanes';
-// import styles from '../Lane/Lane.css';
+import styles from '../Lane/Lane.css';
 import { createLaneRequest, fetchLanes } from '../Lane/LaneActions';
 
 const Kanban = (props) => (
-  <div>
+  <div className={styles.Kanban}>
     <button
+      className={styles.AddLane}
       onClick={() => props.createLane({
         name: 'New lane',
       })}
