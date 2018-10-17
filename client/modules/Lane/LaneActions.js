@@ -10,6 +10,8 @@ export const DELETE_LANE = 'DELETE_LANE';
 export const EDIT_LANE = 'EDIT_LANE';
 export const CREATE_LANES = 'CREATE_LANES';
 export const MOVE_BETWEEN_LANES = 'MOVE_BETWEEN_LANES';
+export const SEND_TO_LANE = 'SEND_TO_LANE';
+export const DELETE_FROM_LANE = 'DELETE_FROM_LANE';
 
 // Export Actions
 
@@ -94,5 +96,40 @@ export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
     targetLaneId,
     noteId,
     sourceLaneId,
+  };
+}
+
+export function deleteFromLane(sourceLaneId, noteId) {
+  return {
+    type: DELETE_FROM_LANE,
+    sourceLaneId,
+    noteId,
+  };
+}
+
+export function sendToLane(targetLaneId, noteId) {
+  return {
+    type: SEND_TO_LANE,
+    targetLaneId,
+    noteId,
+  };
+}
+
+export function changeLanesRequest(sourceLaneId, targetLaneId, noteId, newTask) {
+  return (dispatch) => {
+    return callApi(`notes/${noteId}`, 'delete')
+      .then(() => {
+        callApi('notes', 'post', { note: { id: noteId, task: newTask }, laneId: targetLaneId });
+      })
+      .then(() => {
+        dispatch(deleteFromLane(
+          sourceLaneId,
+          noteId,
+        ));
+        dispatch(sendToLane(
+          targetLaneId,
+          noteId,
+        ));
+      });
   };
 }
